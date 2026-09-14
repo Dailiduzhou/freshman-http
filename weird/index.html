@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080808">
+  <title>流光 · 彩虹跑马灯</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <main id="display" class="display" aria-label="彩虹跑马灯展示">
+    <header class="topbar">
+      <a class="brand" href="./index.html" aria-label="流光首页"><span class="brand-icon" aria-hidden="true">≋</span> 流光 <span class="brand-en">CHROMA / MARQUEE</span></a>
+      <span class="edition">文字在走，颜色在流动。</span>
+    </header>
+
+    <div class="stage" id="stage" role="img" aria-label="这是一条彩虹跑马灯">
+      <div class="track" id="track" aria-hidden="true"></div>
+    </div>
+    <span id="measure" class="measure" aria-hidden="true"></span>
+
+    <footer class="bottombar">
+      <div class="display-info"><span class="live-dot" id="liveDot"></span><span id="playState">LIVE</span><span class="divider">/</span><span>右 → 左 · 无限循环</span></div>
+      <nav class="actions" aria-label="展示控制">
+        <button id="pauseButton" type="button" aria-pressed="false"><span id="pauseIcon" aria-hidden="true">Ⅱ</span> <span id="pauseLabel">暂停</span></button>
+        <button id="fullscreenButton" type="button"><span aria-hidden="true">⛶</span> <span id="fullscreenLabel">全屏</span></button>
+        <button id="settingsButton" class="accent-button" type="button" aria-controls="settings" aria-expanded="false"><span aria-hidden="true">☷</span> 设置</button>
+      </nav>
+    </footer>
+  </main>
+
+  <aside class="settings" id="settings" aria-labelledby="settingsTitle" hidden>
+    <div class="panel-header"><div><p class="eyebrow">MAKE IT YOURS</p><h1 id="settingsTitle">让文字，有点不同。</h1></div><button class="icon-button" type="button" id="closeSettings" aria-label="收起设置">×</button></div>
+    <div class="panel-body">
+      <section class="control-section">
+        <div class="section-heading"><span>01</span><h2>字幕内容</h2></div>
+        <label class="sr-only" for="textInput">自定义字幕文本</label>
+        <textarea id="textInput" rows="3" maxlength="5000" spellcheck="false" placeholder="写点什么，让它流动起来…">这是一条彩虹跑马灯</textarea>
+        <p class="hint">即时预览 · 换行会转为空格</p>
+      </section>
+      <section class="control-section">
+        <div class="section-heading"><span>02</span><h2>字体与字重</h2></div>
+        <label for="fontPreset">字体</label>
+        <select id="fontPreset">
+          <option value="sans">现代黑体 / Sans</option>
+          <option value="serif">经典宋体 / Serif</option>
+          <option value="mono">等宽字体 / Mono</option>
+          <option value="custom">指定本机字体</option>
+          <option value="uploaded" disabled>本次上传的字体</option>
+        </select>
+        <div id="customFontRow" hidden><label for="customFont">本机字体名称</label><input id="customFont" type="text" placeholder="例如：Microsoft YaHei" maxlength="200"><p class="hint">未安装的字体将回退到默认黑体。</p></div>
+        <label class="upload-button" for="fontFile"><span aria-hidden="true">＋</span> 加载本地字体 <span class="file-types">WOFF2 / WOFF / TTF / OTF</span></label>
+        <input class="file-input" id="fontFile" type="file" accept=".woff2,.woff,.ttf,.otf">
+        <p class="hint" id="fontStatus">仅在浏览器中加载，不上传；重新打开需再选。</p>
+        <div class="label-line"><label for="fontWeight">字重</label><output for="fontWeight" id="fontWeightValue">700</output></div>
+        <input id="fontWeight" type="range" min="100" max="900" step="100" value="700">
+        <p class="hint">实际可用字重取决于字体；可变字体表现更佳。</p>
+      </section>
+      <details class="control-section advanced" open>
+        <summary><span class="section-heading"><span>03</span><span class="section-title">高级设置</span></span><span class="chevron" aria-hidden="true">⌄</span></summary>
+        <div class="advanced-body">
+          <div class="label-line"><label for="fontSize">字号</label><output id="fontSizeValue" for="fontSize"></output></div>
+          <input id="fontSize" type="range" min="24" max="360" step="1">
+          <div class="label-line"><label for="scrollSpeed">字幕速度</label><output id="scrollSpeedValue" for="scrollSpeed"></output></div>
+          <input id="scrollSpeed" type="range" min="10" max="400" step="5">
+          <div class="label-line"><label for="colorSpeed">彩虹流速</label><output id="colorSpeedValue" for="colorSpeed"></output></div>
+          <input id="colorSpeed" type="range" min="5" max="200" step="5">
+          <div class="label-line"><label for="angle">色带倾角</label><output id="angleValue" for="angle"></output></div>
+          <input id="angle" type="range" min="0" max="180" step="1">
+          <p class="hint">45° 时，色带分界线从左上斜向右下；文字始终水平。</p>
+          <div class="background-control"><label for="background">背景颜色</label><div><output id="backgroundValue" for="background">#000000</output><input type="color" id="background" value="#000000"></div></div>
+        </div>
+      </details>
+    </div>
+    <div class="panel-footer"><span id="saveStatus" role="status">设置自动保存在本机</span><button type="button" id="resetButton">恢复默认 ↺</button></div>
+  </aside>
+  <div id="notice" class="notice" role="status" hidden></div>
+</body>
+</html>
